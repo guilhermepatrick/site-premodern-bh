@@ -1,0 +1,36 @@
+{
+  "season": {
+    "id": "season-2026",
+    "name": "Temporada 2026",
+    "startDate": "2026-02-04",
+    "endDate": "2026-12-15",
+    "isCurrent": true
+  },
+  "updatedAt": "2026-04-14T00:00:00-03:00",
+  "entries": [
+    { "position": 1,  "player": { "id": "p01", "name": "Márcio Oliveira" },        "points": 41, "eventsPlayed": 12, "trend": "up" },
+    { "position": 2,  "player": { "id": "p02", "name": "Tomás Campos" },           "points": 40, "eventsPlayed": 12, "trend": "same" },
+    { "position": 3,  "player": { "id": "p03", "name": "Fúlvio Augusto" },         "points": 39, "eventsPlayed": 11, "trend": "up" },
+    { "position": 4,  "player": { "id": "p04", "name": "Rodrigo Amormino" },       "points": 38, "eventsPlayed": 12, "trend": "down" },
+    { "position": 5,  "player": { "id": "p05", "name": "John Carvalho" },          "points": 37, "eventsPlayed": 11, "trend": "up" },
+    { "position": 6,  "player": { "id": "p06", "name": "Bruno Lanza" },            "points": 37, "eventsPlayed": 11, "trend": "same" },
+    { "position": 7,  "player": { "id": "p07", "name": "Maurício Amormino" },      "points": 35, "eventsPlayed": 10, "trend": "up" },
+    { "position": 8,  "player": { "id": "p08", "name": "André Vieira" },           "points": 34, "eventsPlayed": 11, "trend": "down" },
+    { "position": 9,  "player": { "id": "p09", "name": "Rafael Giordani" },        "points": 33, "eventsPlayed": 10, "trend": "same" },
+    { "position": 10, "player": { "id": "p10", "name": "Marcos Alves" },           "points": 33, "eventsPlayed": 10, "trend": "up" },
+    { "position": 11, "player": { "id": "p11", "name": "Tiago Couto" },            "points": 33, "eventsPlayed": 10, "trend": "down" },
+    { "position": 12, "player": { "id": "p12", "name": "João Kehdi" },             "points": 32, "eventsPlayed": 9,  "trend": "up" },
+    { "position": 13, "player": { "id": "p13", "name": "Victor Miguel" },          "points": 31, "eventsPlayed": 10, "trend": "same" },
+    { "position": 14, "player": { "id": "p14", "name": "Rafael Gomes" },           "points": 29, "eventsPlayed": 9,  "trend": "up" },
+    { "position": 15, "player": { "id": "p15", "name": "Bráulio Drumont" },        "points": 27, "eventsPlayed": 8,  "trend": "down" },
+    { "position": 16, "player": { "id": "p16", "name": "Jales Bussinguer" },       "points": 26, "eventsPlayed": 8,  "trend": "same" },
+    { "position": 17, "player": { "id": "p17", "name": "Thiago Barbosa Ceccoti" }, "points": 25, "eventsPlayed": 8,  "trend": "up" },
+    { "position": 18, "player": { "id": "p18", "name": "Tiago Ribeiro" },          "points": 21, "eventsPlayed": 7,  "trend": "down" },
+    { "position": 19, "player": { "id": "p19", "name": "Neif Mattar" },            "points": 18, "eventsPlayed": 6,  "trend": "same" },
+    { "position": 20, "player": { "id": "p20", "name": "Simon Elias" },            "points": 15, "eventsPlayed": 5,  "trend": "up" },
+    { "position": 21, "player": { "id": "p21", "name": "Matheus Marra" },          "points": 13, "eventsPlayed": 5,  "trend": "same" },
+    { "position": 22, "player": { "id": "p22", "name": "Henrique Drummond" },      "points": 13, "eventsPlayed": 4,  "trend": "up" },
+    { "position": 23, "player": { "id": "p23", "name": "Fabrício Carmelito" },     "points": 13, "eventsPlayed": 4,  "trend": "same" },
+    { "position": 24, "player": { "id": "p24", "name": "Lucas Costa" },            "points": 12, "eventsPlayed": 4,  "trend": "down" }
+  ]
+}

@@ -1,0 +1,23 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+.env.*.local
+.vite
+*.log
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# build artifacts gerados por tsc -b
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js
+
+# estado local do Claude Code
+.claude/
+
+# memoria de conversa local
+memory/
