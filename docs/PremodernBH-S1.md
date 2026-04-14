@@ -27,6 +27,7 @@ Entregar o **scaffold do site** da liga em React+TS com **landing page instituci
 | `[14ABR S1F5]` | Página `/ranking` com Top 8 banner + tabela completa | Front | ✅ Concluído |
 | `[14ABR S1B1]` | Mockup JSON com 24 jogadores reais da temporada | Back | ✅ Concluído |
 | `[14ABR S1G1]` | Commit inicial + criação do repositório público | Git | ✅ Concluído |
+| `[14ABR S1I1]` | Deploy Vercel + integração GitHub | DevOps | ✅ Concluído |
 
 ## Stack Definida
 
@@ -123,7 +124,6 @@ site-premodern-bh/
 
 ## Pendências para Próxima Sprint (S2)
 
-- [ ] **Deploy Vercel** (S1I1 ainda em execução — bastão pendente para `[Guizao-DevOps]`)
 - [ ] Provisionar projeto Supabase + aplicar DDL de `arquitetura-S1.md`
 - [ ] Substituir `useRanking()` por client Supabase + RLS de leitura pública
 - [ ] Página `/noticias` com Markdown renderizado + imagens via Supabase Storage
@@ -149,9 +149,12 @@ site-premodern-bh/
 
 ## Links
 
+- **Site em produção:** https://site-premodern-bh.vercel.app/
 - **Repositório:** https://github.com/guilhermepatrick/site-premodern-bh
-- **Commit S1:** `48ffe93` — `feat: scaffold inicial da Liga Premodern BH (S1)`
+- **Commit S1 (scaffold):** `48ffe93` — `feat: scaffold inicial da Liga Premodern BH (S1)`
+- **Commit S1 (docs):** `663ecb3` — `docs: documentacao da Sprint S1 + indice do projeto`
 - **Branch:** `main`
+- **Deploy:** Vercel (auto-deploy via GitHub `main`)
 - **Documentos relacionados:**
   - `[[arquitetura-S1]]` — diagramas, schema SQL, paleta completa
   - `[[PremodernBH-Mapa]]` — índice geral do projeto

@@ -28,6 +28,7 @@ Site institucional + ranking online da **Liga Premodern Beagá**, comunidade de 
 
 ## Links
 
+- **Site em produção:** https://site-premodern-bh.vercel.app/
 - **Repositório:** https://github.com/guilhermepatrick/site-premodern-bh
 - **Instagram da liga:** https://www.instagram.com/premodernbeaga/
 - **Local oficial:** Vault of Cards — Belo Horizonte/MG
