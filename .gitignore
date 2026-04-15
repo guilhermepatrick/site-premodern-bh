@@ -21,3 +21,7 @@ vite.config.js
 
 # memoria de conversa local
 memory/
+
+# tesseract traineddata baixado em tempo de execucao/teste
+*.traineddata
+refs/_*.png
