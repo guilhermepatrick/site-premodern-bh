@@ -19,8 +19,11 @@ export default function RankingTable({ entries }: RankingTableProps) {
             <tr className="border-b-2 border-pm-frame">
               <th className="text-left py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest">POS</th>
               <th className="text-left py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest">JOGADOR</th>
-              <th className="hidden sm:table-cell py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest text-center">ETAPAS</th>
-              <th className="hidden md:table-cell py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest text-center">VAR.</th>
+              <th className="py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest text-center">
+                <span className="hidden sm:inline">PARTICIPAÇÕES</span>
+                <span className="sm:hidden">PART.</span>
+              </th>
+              <th className="py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest text-center">% APROV.</th>
               <th className="text-right py-2 px-2 md:px-4 font-title text-pm-frame text-xs tracking-widest">PONTOS</th>
             </tr>
           </thead>

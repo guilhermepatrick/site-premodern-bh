@@ -1,4 +1,3 @@
-import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import type { RankingEntry } from '../../types/domain';
 import PowerToughnessBox from '../ui/PowerToughnessBox';
 
@@ -24,11 +23,11 @@ export default function RankingRow({ entry }: RankingRowProps) {
           <div className="font-body italic text-pm-frame text-xs">"{entry.player.nickname}"</div>
         )}
       </td>
-      <td className="py-3 px-2 md:px-4 hidden sm:table-cell text-center">
+      <td className="py-3 px-2 md:px-4 text-center">
         <span className="font-body text-pm-ink">{entry.eventsPlayed}</span>
       </td>
-      <td className="py-3 px-2 md:px-4 hidden md:table-cell text-center">
-        <TrendIcon trend={entry.trend} />
+      <td className="py-3 px-2 md:px-4 text-center">
+        <span className="font-title text-pm-ink font-semibold">{entry.winRate.toFixed(1)}%</span>
       </td>
       <td className="py-3 px-2 md:px-4">
         <div className="flex justify-end">
@@ -37,10 +36,4 @@ export default function RankingRow({ entry }: RankingRowProps) {
       </td>
     </tr>
   );
-}
-
-function TrendIcon({ trend }: { trend?: 'up' | 'down' | 'same' }) {
-  if (trend === 'up')   return <ArrowUp   size={18} className="text-pm-green-deep mx-auto" />;
-  if (trend === 'down') return <ArrowDown size={18} className="text-pm-brown-deep mx-auto" />;
-  return <Minus size={18} className="text-pm-frame/60 mx-auto" />;
 }

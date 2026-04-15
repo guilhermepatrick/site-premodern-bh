@@ -5,6 +5,7 @@ import { useState } from 'react';
 const navItems = [
   { to: '/', label: 'Início', end: true },
   { to: '/ranking', label: 'Ranking' },
+  { to: '/etapas', label: 'Etapas' },
 ];
 
 export default function Header() {

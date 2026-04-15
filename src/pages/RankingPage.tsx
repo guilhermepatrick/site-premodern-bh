@@ -4,17 +4,36 @@ import Top8Banner from '../components/ranking/Top8Banner';
 import Section from '../components/ui/Section';
 
 export default function RankingPage() {
-  const { season, updatedAt, entries } = useRanking();
+  const { data, loading, error } = useRanking();
+
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-24 text-center text-pm-parchment-2 italic">
+        Carregando ranking...
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-24 text-center text-red-400">
+        Erro ao carregar ranking: {error ?? 'dados indisponiveis.'}
+      </div>
+    );
+  }
+
+  const { season, updatedAt, entries } = data;
   const updated = new Date(updatedAt).toLocaleDateString('pt-BR');
 
   return (
     <>
       <header className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-25"
-             style={{
-               backgroundImage:
-                 'radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.6) 0%, transparent 60%)',
-             }}
+        <div
+          className="absolute inset-0 opacity-25"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.6) 0%, transparent 60%)',
+          }}
         />
         <div className="relative max-w-6xl mx-auto px-4 py-12 text-center">
           <div className="font-title text-pm-gold tracking-[0.4em] text-xs mb-3">
@@ -30,13 +49,23 @@ export default function RankingPage() {
         </div>
       </header>
 
-      <Section eyebrow="INVITATIONAL" title="Top 8 da temporada" id="top8">
-        <Top8Banner entries={entries} />
-      </Section>
+      {entries.length === 0 ? (
+        <Section eyebrow="AGUARDANDO" title="Nenhuma etapa importada" id="vazio">
+          <p className="text-center italic text-pm-parchment-2">
+            O ranking aparece assim que a primeira etapa for registrada.
+          </p>
+        </Section>
+      ) : (
+        <>
+          <Section eyebrow="INVITATIONAL" title="Top 8 da temporada" id="top8">
+            <Top8Banner entries={entries} />
+          </Section>
 
-      <Section eyebrow="TABELA COMPLETA" title="Ranking geral" id="tabela">
-        <RankingTable entries={entries} />
-      </Section>
+          <Section eyebrow="TABELA COMPLETA" title="Ranking geral" id="tabela">
+            <RankingTable entries={entries} />
+          </Section>
+        </>
+      )}
     </>
   );
 }

@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Upload, Loader2, AlertTriangle, Trash2, Save, FileText } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Upload, Loader2, AlertTriangle, Trash2, Save, FileText, LogOut } from 'lucide-react';
 import Section from '../components/ui/Section';
 import { extractEventFromPdf, type ExtractedEvent } from '../lib/eventPdfParser';
 import {
@@ -12,6 +12,7 @@ import {
   type Stage,
   type StageResult,
 } from '../lib/stagesStorage';
+import { useAuth } from '../lib/auth';
 
 type Phase = 'rasterizing' | 'ocr' | 'parsing';
 
@@ -26,6 +27,7 @@ interface DraftRow extends StageResult {
 }
 
 export default function RegisterStagePage() {
+  const { signOut } = useAuth();
   const [busy, setBusy] = useState(false);
   const [phase, setPhase] = useState<Phase | null>(null);
   const [progress, setProgress] = useState(0);
@@ -38,12 +40,37 @@ export default function RegisterStagePage() {
   const [draftRows, setDraftRows] = useState<DraftRow[]>([]);
   const [rawText, setRawText] = useState<string>('');
 
-  const [savedStages, setSavedStages] = useState<Stage[]>(loadStages());
+  const [savedStages, setSavedStages] = useState<Stage[]>([]);
+  const [known, setKnown] = useState<Set<string>>(new Set());
+  const [duplicateStage, setDuplicateStage] = useState<Stage | null>(null);
 
-  const known = useMemo(() => knownPlayerNames(), [savedStages]);
-  const duplicateEventLinkId = draftEventLinkId
-    ? findStageByEventLinkId(draftEventLinkId)
-    : undefined;
+  async function refreshAll() {
+    try {
+      const [stages, knownSet] = await Promise.all([loadStages(), knownPlayerNames()]);
+      setSavedStages(stages);
+      setKnown(knownSet);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Falha ao carregar dados.');
+    }
+  }
+
+  useEffect(() => {
+    void refreshAll();
+  }, []);
+
+  useEffect(() => {
+    if (!draftEventLinkId.trim()) {
+      setDuplicateStage(null);
+      return;
+    }
+    let cancelled = false;
+    findStageByEventLinkId(draftEventLinkId.trim()).then((s) => {
+      if (!cancelled) setDuplicateStage(s);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [draftEventLinkId]);
 
   function resetDraft() {
     setDraftName('');
@@ -94,34 +121,42 @@ export default function RegisterStagePage() {
     setDraftRows((rows) => rows.filter((r) => r._key !== key));
   }
 
-  function handleSave() {
+  async function handleSave() {
     setError(null);
     if (!draftName.trim()) return setError('Informe o nome da etapa.');
     if (!draftDate) return setError('Informe a data do evento.');
     if (draftRows.length === 0) return setError('Nenhum jogador para salvar.');
     if (draftRows.some((r) => !r.name.trim())) return setError('Todo jogador precisa ter um nome.');
-    if (duplicateEventLinkId) {
-      return setError(`Este evento (ID ${draftEventLinkId}) ja foi importado em ${duplicateEventLinkId.eventDate}.`);
+    if (duplicateStage) {
+      return setError(`Este evento (ID ${draftEventLinkId}) ja foi importado em ${duplicateStage.eventDate}.`);
     }
 
-    const stage: Stage = {
-      id: crypto.randomUUID(),
-      name: draftName.trim(),
-      eventLinkId: draftEventLinkId.trim() || undefined,
-      eventDate: draftDate,
-      rounds: typeof draftRounds === 'number' ? draftRounds : undefined,
-      importedAt: new Date().toISOString(),
-      results: draftRows.map(({ _key, ...rest }) => ({ ...rest, name: rest.name.trim() })),
-    };
-    saveStage(stage);
-    setSavedStages(loadStages());
-    resetDraft();
+    setBusy(true);
+    try {
+      await saveStage({
+        name: draftName.trim(),
+        eventLinkId: draftEventLinkId.trim() || undefined,
+        eventDate: draftDate,
+        rounds: typeof draftRounds === 'number' ? draftRounds : undefined,
+        results: draftRows.map(({ _key, ...rest }) => ({ ...rest, name: rest.name.trim() })),
+      });
+      resetDraft();
+      await refreshAll();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Falha ao salvar etapa.');
+    } finally {
+      setBusy(false);
+    }
   }
 
-  function handleDeleteStage(id: string) {
+  async function handleDeleteStage(id: string) {
     if (!confirm('Remover esta etapa?')) return;
-    deleteStage(id);
-    setSavedStages(loadStages());
+    try {
+      await deleteStage(id);
+      await refreshAll();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Falha ao remover etapa.');
+    }
   }
 
   return (
@@ -143,6 +178,12 @@ export default function RegisterStagePage() {
           <p className="font-body italic text-pm-parchment-2">
             Suba o PDF do EventLink para importar os resultados
           </p>
+          <button
+            onClick={() => void signOut()}
+            className="mt-4 inline-flex items-center gap-2 text-pm-cream hover:text-pm-gold-hi text-sm font-title tracking-wider"
+          >
+            <LogOut size={14} /> Sair
+          </button>
         </div>
       </header>
 
@@ -239,12 +280,12 @@ export default function RegisterStagePage() {
                 </Field>
               </div>
 
-              {duplicateEventLinkId && (
+              {duplicateStage && (
                 <div className="flex items-start gap-2 text-amber-800 bg-amber-100/60 border border-amber-700/40 p-3 rounded-sm">
                   <AlertTriangle size={18} className="mt-0.5 shrink-0" />
                   <span className="text-sm">
                     Este ID EventLink ja foi importado em{' '}
-                    <strong>{duplicateEventLinkId.eventDate}</strong>. Altere o ID ou apague a etapa
+                    <strong>{duplicateStage.eventDate}</strong>. Altere o ID ou apague a etapa
                     duplicada antes de salvar.
                   </span>
                 </div>
@@ -257,9 +298,6 @@ export default function RegisterStagePage() {
                       <th className="text-left py-2 px-2 font-title text-pm-frame text-xs tracking-widest">POS</th>
                       <th className="text-left py-2 px-2 font-title text-pm-frame text-xs tracking-widest">JOGADOR</th>
                       <th className="text-right py-2 px-2 font-title text-pm-frame text-xs tracking-widest">PONTOS</th>
-                      <th className="hidden md:table-cell text-center py-2 px-2 font-title text-pm-frame text-xs tracking-widest">%VPG</th>
-                      <th className="hidden md:table-cell text-center py-2 px-2 font-title text-pm-frame text-xs tracking-widest">%VJ</th>
-                      <th className="hidden md:table-cell text-center py-2 px-2 font-title text-pm-frame text-xs tracking-widest">%VJG</th>
                       <th className="py-2 px-2"></th>
                     </tr>
                   </thead>
@@ -296,36 +334,6 @@ export default function RegisterStagePage() {
                               value={r.points}
                               onChange={(e) => updateRow(r._key, { points: Number(e.target.value) })}
                               className="input-pm w-16 text-right"
-                            />
-                          </td>
-                          <td className="hidden md:table-cell py-1 px-2 w-16">
-                            <input
-                              type="number"
-                              value={r.vpg ?? ''}
-                              onChange={(e) =>
-                                updateRow(r._key, { vpg: e.target.value === '' ? undefined : Number(e.target.value) })
-                              }
-                              className="input-pm w-14 text-center"
-                            />
-                          </td>
-                          <td className="hidden md:table-cell py-1 px-2 w-16">
-                            <input
-                              type="number"
-                              value={r.vj ?? ''}
-                              onChange={(e) =>
-                                updateRow(r._key, { vj: e.target.value === '' ? undefined : Number(e.target.value) })
-                              }
-                              className="input-pm w-14 text-center"
-                            />
-                          </td>
-                          <td className="hidden md:table-cell py-1 px-2 w-16">
-                            <input
-                              type="number"
-                              value={r.vjg ?? ''}
-                              onChange={(e) =>
-                                updateRow(r._key, { vjg: e.target.value === '' ? undefined : Number(e.target.value) })
-                              }
-                              className="input-pm w-14 text-center"
                             />
                           </td>
                           <td className="py-1 px-2 w-10 text-right">

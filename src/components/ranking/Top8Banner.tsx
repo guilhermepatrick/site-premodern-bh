@@ -32,6 +32,9 @@ export default function Top8Banner({ entries }: Top8BannerProps) {
               <div className="mt-2 flex justify-center">
                 <PowerToughnessBox power={entry.points} size="sm" />
               </div>
+              <div className="mt-1 text-[10px] font-title tracking-wider text-pm-frame">
+                {entry.winRate.toFixed(1)}%
+              </div>
             </div>
           ))}
         </div>

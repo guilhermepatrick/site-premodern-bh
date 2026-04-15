@@ -10,6 +10,8 @@ export interface RankingEntry {
   player: Player;
   points: number;
   eventsPlayed: number;
+  /** Aproveitamento em %: pontos / (etapas * 12) * 100. */
+  winRate: number;
   trend?: 'up' | 'down' | 'same';
 }
 

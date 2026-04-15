@@ -8,9 +8,6 @@ export interface ExtractedResult {
   position: number;
   name: string;
   points: number;
-  vpg?: number;
-  vj?: number;
-  vjg?: number;
 }
 
 export interface ExtractedEvent {
@@ -70,15 +67,13 @@ function parseOcrText(text: string): Omit<ExtractedEvent, 'rawText'> {
     const mRodada = line.match(/Rodada\s+(\d+)/i);
     if (mRodada && !rounds) rounds = Number(mRodada[1]);
 
-    const mRow = line.match(/^(\d+)\s+(.+?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$/);
+    // Ancora nos 4 numeros finais (pontos, %VPG, %VJ, %VJG) mas guarda so pontos.
+    const mRow = line.match(/^(\d+)\s+(.+?)\s+(\d+)\s+\d+\s+\d+\s+\d+\s*$/);
     if (mRow) {
       results.push({
         position: Number(mRow[1]),
         name: mRow[2].trim(),
         points: Number(mRow[3]),
-        vpg: Number(mRow[4]),
-        vj: Number(mRow[5]),
-        vjg: Number(mRow[6]),
       });
     }
   }
