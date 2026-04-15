@@ -128,6 +128,17 @@ export interface Database {
         };
         Returns: string;
       };
+      update_stage: {
+        Args: {
+          p_stage_id: string;
+          p_name: string;
+          p_eventlink_id: string;
+          p_event_date: string;
+          p_rounds: number | null;
+          p_results: Json;
+        };
+        Returns: string;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

@@ -5,6 +5,7 @@ import RankingPage from './pages/RankingPage';
 import StagesListPage from './pages/StagesListPage';
 import StageDetailPage from './pages/StageDetailPage';
 import RegisterStagePage from './pages/RegisterStagePage';
+import EditStagePage from './pages/EditStagePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import RequireAuth from './components/RequireAuth';
 
@@ -22,6 +23,14 @@ export default function App() {
           element={
             <RequireAuth>
               <RegisterStagePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/admin/etapas/:id/editar"
+          element={
+            <RequireAuth>
+              <EditStagePage />
             </RequireAuth>
           }
         />

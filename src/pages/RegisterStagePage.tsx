@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Upload, Loader2, AlertTriangle, Trash2, Save, FileText, LogOut } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Upload, Loader2, AlertTriangle, Trash2, Save, FileText, LogOut, Pencil } from 'lucide-react';
 import Section from '../components/ui/Section';
 import { extractEventFromPdf, type ExtractedEvent } from '../lib/eventPdfParser';
 import {
@@ -400,13 +401,22 @@ export default function RegisterStagePage() {
                           {s.eventLinkId ? ` · ID ${s.eventLinkId}` : ''}
                         </div>
                       </div>
-                      <button
-                        onClick={() => handleDeleteStage(s.id)}
-                        className="text-red-700 hover:text-red-900"
-                        aria-label="Apagar etapa"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <Link
+                          to={`/admin/etapas/${s.id}/editar`}
+                          className="text-pm-frame hover:text-pm-ink"
+                          aria-label="Editar etapa"
+                        >
+                          <Pencil size={16} />
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteStage(s.id)}
+                          className="text-red-700 hover:text-red-900"
+                          aria-label="Apagar etapa"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </li>
                   ))}
               </ul>

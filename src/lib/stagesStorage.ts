@@ -84,6 +84,59 @@ export interface StageDraft {
   results: StageResult[];
 }
 
+export async function loadStageForEdit(id: string): Promise<Stage> {
+  const { data: stage, error } = await supabase
+    .from('stages')
+    .select('id, name, eventlink_id, event_date, rounds, imported_at')
+    .eq('id', id)
+    .maybeSingle();
+  if (error) throw error;
+  if (!stage) throw new Error('Etapa nao encontrada.');
+
+  const { data: results, error: rErr } = await supabase
+    .from('stage_results')
+    .select('position, points, players(name)')
+    .eq('stage_id', id)
+    .order('position');
+  if (rErr) throw rErr;
+
+  return {
+    id: stage.id,
+    name: stage.name,
+    eventLinkId: stage.eventlink_id ?? undefined,
+    eventDate: stage.event_date,
+    rounds: stage.rounds ?? undefined,
+    importedAt: stage.imported_at,
+    results: (results ?? []).map((r) => {
+      const player = r.players as { name: string } | null;
+      return {
+        position: r.position,
+        name: player?.name ?? '',
+        points: r.points,
+      };
+    }),
+  };
+}
+
+export async function updateStage(id: string, draft: StageDraft): Promise<void> {
+  const results = draft.results.map((r) => ({
+    position: r.position,
+    points: r.points,
+    name: r.name.trim(),
+    normalized_name: normalizeName(r.name),
+  }));
+
+  const { error } = await supabase.rpc('update_stage', {
+    p_stage_id: id,
+    p_name: draft.name,
+    p_eventlink_id: draft.eventLinkId ?? '',
+    p_event_date: draft.eventDate,
+    p_rounds: draft.rounds ?? null,
+    p_results: results,
+  });
+  if (error) throw error;
+}
+
 export async function saveStage(draft: StageDraft): Promise<string> {
   const seasonId = await getActiveSeasonId();
   const results = draft.results.map((r) => ({
