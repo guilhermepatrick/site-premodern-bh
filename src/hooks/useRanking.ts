@@ -19,6 +19,7 @@ export function useRanking(): UseRankingState {
           .from('seasons')
           .select('id, name, start_date, end_date, is_active')
           .eq('is_active', true)
+          .eq('format', 'PREMODERN')
           .order('created_at', { ascending: false })
           .limit(1)
           .maybeSingle();

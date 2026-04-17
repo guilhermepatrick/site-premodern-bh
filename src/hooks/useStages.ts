@@ -39,6 +39,7 @@ export function useStagesList(): AsyncState<StageSummary[]> {
           .from('seasons')
           .select('id')
           .eq('is_active', true)
+          .eq('format', 'PREMODERN')
           .order('created_at', { ascending: false })
           .limit(1)
           .maybeSingle();
