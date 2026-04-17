@@ -51,6 +51,7 @@ export interface Database {
           rounds: number | null;
           imported_at: string;
           created_by: string | null;
+          event_type: 'semanal' | 'liga';
         };
         Insert: {
           id?: string;
@@ -61,6 +62,7 @@ export interface Database {
           rounds?: number | null;
           imported_at?: string;
           created_by?: string | null;
+          event_type?: 'semanal' | 'liga';
         };
         Update: Partial<Database['public']['Tables']['stages']['Insert']>;
         Relationships: [
@@ -125,6 +127,7 @@ export interface Database {
           p_event_date: string;
           p_rounds: number | null;
           p_results: Json;
+          p_event_type?: 'semanal' | 'liga';
         };
         Returns: string;
       };
@@ -136,6 +139,7 @@ export interface Database {
           p_event_date: string;
           p_rounds: number | null;
           p_results: Json;
+          p_event_type?: 'semanal' | 'liga';
         };
         Returns: string;
       };

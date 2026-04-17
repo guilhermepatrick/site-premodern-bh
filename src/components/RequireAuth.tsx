@@ -1,20 +1,21 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import type { ReactNode } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 
-export default function RequireAuth({ children }: { children: ReactNode }) {
+export default function RequireAuth() {
   const { session, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-24 text-center text-pm-parchment-2 italic">
-        Verificando sessao...
+      <div className="min-h-[40vh] flex items-center justify-center bg-vc-bg">
+        <div className="h-10 w-10 rounded-full border-2 border-vc-border border-t-vc-cyan animate-spin" />
       </div>
     );
   }
+
   if (!session) {
-    return <Navigate to="/admin" state={{ from: location.pathname }} replace />;
+    return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
   }
-  return <>{children}</>;
+
+  return <Outlet />;
 }
