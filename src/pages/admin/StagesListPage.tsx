@@ -43,7 +43,7 @@ export default function StagesListPage() {
     <Section eyebrow="Admin" title="Etapas cadastradas">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div>
-          <p className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted mb-2">
+          <p className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 mb-2">
             Tipo
           </p>
           <div className="flex flex-wrap gap-2">
@@ -55,8 +55,8 @@ export default function StagesListPage() {
                 aria-pressed={typeFilter === t.value}
                 className={`px-4 py-1.5 rounded-full text-sm font-title font-600 uppercase tracking-widest border transition-all ${
                   typeFilter === t.value
-                    ? 'bg-vc-cyan border-vc-cyan text-vc-bg shadow-vc-cyan'
-                    : 'bg-transparent border-vc-border-2 text-vc-muted hover:border-vc-cyan hover:text-vc-white'
+                    ? 'bg-pm-gold border-pm-gold text-pm-ink'
+                    : 'bg-transparent border-pm-frame text-pm-parchment-2 hover:border-pm-gold hover:text-pm-cream'
                 }`}
               >
                 {t.label}
@@ -67,14 +67,14 @@ export default function StagesListPage() {
 
         <Link
           to="/admin/etapas/nova"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-vc-blue hover:bg-vc-blue-hi text-vc-white font-title font-600 uppercase tracking-widest text-sm shadow-vc-blue transition-colors self-start"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-pm-green hover:bg-pm-green-hi text-pm-cream font-title font-600 uppercase tracking-widest text-sm transition-colors self-start"
         >
           <Plus size={16} /> Nova etapa
         </Link>
       </div>
 
       {loading ? (
-        <div className="flex items-center gap-2 text-vc-muted">
+        <div className="flex items-center gap-2 text-pm-parchment-2 font-body italic">
           <Loader2 size={16} className="animate-spin" /> Carregando etapas...
         </div>
       ) : error ? (
@@ -94,26 +94,26 @@ export default function StagesListPage() {
           </div>
         </div>
       ) : stages.length === 0 ? (
-        <div className="border border-dashed border-vc-border-2 rounded-lg p-8 text-center">
-          <p className="text-vc-muted text-sm">Nenhuma etapa encontrada para esse filtro.</p>
+        <div className="border border-dashed border-pm-frame rounded-sm p-8 text-center">
+          <p className="text-pm-parchment-2 text-sm font-body italic">Nenhuma etapa encontrada para esse filtro.</p>
           <Link
             to="/admin/etapas/nova"
-            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded bg-vc-blue hover:bg-vc-blue-hi text-vc-white font-title font-600 uppercase tracking-widest text-xs"
+            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded bg-pm-green hover:bg-pm-green-hi text-pm-cream font-title font-600 uppercase tracking-widest text-xs"
           >
             <Plus size={14} /> Nova etapa
           </Link>
         </div>
       ) : (
-        <ul className="divide-y divide-vc-border border border-vc-border rounded-lg overflow-hidden">
+        <ul className="divide-y divide-pm-frame border border-pm-frame rounded-sm overflow-hidden shadow-card-lift">
           {stages.map((s) => (
-            <li key={s.id} className="bg-vc-bg-2 hover:bg-vc-bg-3 transition-colors">
+            <li key={s.id} className="bg-pm-bg-2 hover:bg-pm-frame transition-colors">
               <Link
                 to={`/admin/etapas/${s.id}`}
                 className="flex items-center justify-between gap-4 px-4 py-3"
               >
                 <div className="min-w-0">
-                  <p className="font-title text-vc-white font-600 truncate">{s.name}</p>
-                  <p className="text-xs text-vc-muted mt-0.5 flex flex-wrap gap-x-3">
+                  <p className="font-title text-pm-cream font-600 truncate">{s.name}</p>
+                  <p className="text-xs text-pm-parchment-2 mt-0.5 flex flex-wrap gap-x-3 font-body">
                     <span>{s.eventDate}</span>
                     {s.seasonName && <span>· {s.seasonName}</span>}
                     {typeof s.rounds === 'number' && <span>· {s.rounds} rodadas</span>}
@@ -121,15 +121,15 @@ export default function StagesListPage() {
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-widest border ${
+                    className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-widest border font-title ${
                       s.eventType === 'liga'
-                        ? 'bg-vc-blue/10 text-vc-blue-hi border-vc-blue/40'
-                        : 'bg-vc-cyan/10 text-vc-cyan border-vc-cyan/40'
+                        ? 'bg-pm-green/15 text-pm-green-hi border-pm-green/40'
+                        : 'bg-pm-gold/10 text-pm-gold border-pm-gold/40'
                     }`}
                   >
                     {s.eventType}
                   </span>
-                  <Pencil size={14} className="text-vc-muted" />
+                  <Pencil size={14} className="text-pm-parchment-2" />
                 </div>
               </Link>
             </li>

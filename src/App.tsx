@@ -18,8 +18,8 @@ const EditSeasonPage = lazy(() => import('./pages/admin/EditSeasonPage'));
 
 function AdminFallback() {
   return (
-    <div className="min-h-[40vh] flex items-center justify-center bg-vc-bg">
-      <div className="h-10 w-10 rounded-full border-2 border-vc-border border-t-vc-cyan animate-spin" />
+    <div className="min-h-[40vh] flex items-center justify-center bg-pm-bg">
+      <div className="h-10 w-10 rounded-full border-2 border-pm-frame border-t-pm-gold animate-spin" />
     </div>
   );
 }

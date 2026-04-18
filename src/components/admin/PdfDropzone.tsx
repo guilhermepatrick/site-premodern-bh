@@ -38,14 +38,14 @@ export default function PdfDropzone({ onFile, busy, phase, progress, disabled }:
       onDragLeave={() => setDragging(false)}
       onDrop={handleDrop}
       onClick={() => isInteractive && inputRef.current?.click()}
-      className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+      className={`border-2 border-dashed rounded-sm p-8 text-center transition-colors ${
         dragging
-          ? 'border-vc-cyan bg-vc-bg-3'
+          ? 'border-pm-gold bg-pm-frame'
           : disabled
-            ? 'border-vc-border bg-vc-bg-2 opacity-60 cursor-not-allowed'
+            ? 'border-pm-frame bg-pm-bg-2 opacity-60 cursor-not-allowed'
             : busy
-              ? 'border-vc-blue bg-vc-bg-2 cursor-wait'
-              : 'border-vc-border-2 hover:border-vc-blue cursor-pointer'
+              ? 'border-pm-green bg-pm-bg-2 cursor-wait'
+              : 'border-pm-frame hover:border-pm-gold cursor-pointer'
       }`}
       role="button"
       aria-disabled={disabled || busy}
@@ -60,22 +60,22 @@ export default function PdfDropzone({ onFile, busy, phase, progress, disabled }:
       />
 
       {busy ? (
-        <div className="flex flex-col items-center gap-2 text-vc-white">
-          <Loader2 className="animate-spin" size={32} />
+        <div className="flex flex-col items-center gap-2 text-pm-cream">
+          <Loader2 className="animate-spin text-pm-gold" size={32} />
           <p className="font-title uppercase tracking-widest text-sm">{phase}</p>
           {typeof progress === 'number' && (
-            <div className="w-48 h-1.5 bg-vc-bg-3 rounded overflow-hidden">
+            <div className="w-48 h-1.5 bg-pm-frame rounded overflow-hidden">
               <div
-                className="h-full bg-vc-cyan transition-all"
+                className="h-full bg-pm-gold transition-all"
                 style={{ width: `${Math.round(progress * 100)}%` }}
               />
             </div>
           )}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-2 text-vc-muted">
-          <Upload size={32} className="text-vc-blue" />
-          <p className="font-title uppercase tracking-widest text-sm text-vc-white">
+        <div className="flex flex-col items-center gap-2 text-pm-parchment-2">
+          <Upload size={32} className="text-pm-gold" />
+          <p className="font-title uppercase tracking-widest text-sm text-pm-cream">
             Solte o PDF aqui ou clique para selecionar
           </p>
           <p className="text-xs flex items-center gap-1">

@@ -128,7 +128,7 @@ export default function RegisterStagePage() {
   return (
     <Section eyebrow="Admin" title="Nova etapa">
       <div className="space-y-6">
-        <div className="bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card space-y-5">
+        <div className="bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift space-y-5">
           <FormatSeasonPicker
             seasonId={seasonId}
             onSeasonChange={setSeasonId}
@@ -137,7 +137,7 @@ export default function RegisterStagePage() {
           <EventTypeSelect value={eventType} onChange={setEventType} disabled={busy || saving} />
         </div>
 
-        <div className="bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card">
+        <div className="bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift">
           <PdfDropzone
             onFile={handlePdf}
             busy={busy}
@@ -146,7 +146,7 @@ export default function RegisterStagePage() {
             disabled={saving || !seasonId}
           />
           {!seasonId && (
-            <p className="text-vc-muted text-xs mt-2 italic">
+            <p className="text-pm-parchment-2 text-xs mt-2 italic font-body">
               Selecione a temporada antes de carregar o PDF.
             </p>
           )}
@@ -192,35 +192,35 @@ export default function RegisterStagePage() {
         )}
 
         {(draftRows.length > 0 || draftName || draftDate) && (
-          <div className="bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card space-y-4">
-            <h3 className="font-title uppercase tracking-widest text-sm text-vc-muted">
+          <div className="bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift space-y-4">
+            <h3 className="font-title uppercase tracking-widest text-sm text-pm-gold">
               Detalhes da etapa
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <label className="block">
-                <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+                <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                   Nome
                 </span>
                 <input
                   type="text"
                   value={draftName}
                   onChange={(e) => setDraftName(e.target.value)}
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
                 />
               </label>
               <label className="block">
-                <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+                <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                   Data
                 </span>
                 <input
                   type="date"
                   value={draftDate}
                   onChange={(e) => setDraftDate(e.target.value)}
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
                 />
               </label>
               <label className="block">
-                <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+                <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                   Rodadas
                 </span>
                 <input
@@ -230,18 +230,18 @@ export default function RegisterStagePage() {
                   onChange={(e) =>
                     setDraftRounds(e.target.value === '' ? '' : Number(e.target.value))
                   }
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
                 />
               </label>
               <label className="block md:col-span-3">
-                <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+                <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                   EventLink ID
                 </span>
                 <input
                   type="text"
                   value={draftEventLinkId}
                   onChange={(e) => setDraftEventLinkId(e.target.value)}
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
                 />
               </label>
             </div>
@@ -268,7 +268,7 @@ export default function RegisterStagePage() {
         <div className="flex items-center justify-end gap-3">
           <Link
             to="/admin/etapas"
-            className="px-4 py-2 rounded border border-vc-border-2 text-vc-muted hover:text-vc-white hover:border-vc-blue font-title uppercase tracking-widest text-xs"
+            className="px-4 py-2 rounded border border-pm-frame text-pm-parchment-2 hover:text-pm-cream hover:border-pm-gold font-title uppercase tracking-widest text-xs"
           >
             Cancelar
           </Link>
@@ -276,7 +276,7 @@ export default function RegisterStagePage() {
             type="button"
             onClick={handleSave}
             disabled={!canSave}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-vc-blue hover:bg-vc-blue-hi disabled:bg-vc-blue-dim disabled:cursor-not-allowed text-vc-white font-title font-600 uppercase tracking-widest text-sm shadow-vc-blue transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-pm-green hover:bg-pm-green-hi disabled:bg-pm-green-deep disabled:cursor-not-allowed text-pm-cream font-title font-600 uppercase tracking-widest text-sm transition-colors"
           >
             {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
             {saving ? 'Salvando...' : 'Salvar etapa'}

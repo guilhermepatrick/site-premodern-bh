@@ -4,7 +4,7 @@ import { useAuth } from '../../lib/auth';
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   `px-4 py-1.5 rounded text-sm font-title font-600 uppercase tracking-widest transition-colors ${
-    isActive ? 'bg-vc-blue text-vc-white' : 'text-vc-muted hover:text-vc-white'
+    isActive ? 'bg-pm-green text-pm-cream' : 'text-pm-parchment-2 hover:text-pm-cream'
   }`;
 
 export default function AdminHeader() {
@@ -17,10 +17,10 @@ export default function AdminHeader() {
   }
 
   return (
-    <header className="border-b border-vc-border bg-vc-bg-2">
+    <header className="border-b border-pm-frame bg-pm-bg-2">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/admin/etapas" className="flex items-center gap-2.5 group">
-          <span className="font-title font-700 text-xl tracking-[0.2em] text-vc-white group-hover:text-vc-cyan transition-colors uppercase">
+          <span className="font-title font-700 text-xl tracking-[0.2em] text-pm-cream group-hover:text-pm-gold transition-colors uppercase">
             PREMODERN · ADMIN
           </span>
         </Link>
@@ -34,7 +34,7 @@ export default function AdminHeader() {
           </NavLink>
           <button
             onClick={handleLogout}
-            className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-sm font-title font-600 uppercase tracking-widest text-vc-muted hover:text-vc-white border border-vc-border-2 hover:border-vc-blue transition-colors"
+            className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-sm font-title font-600 uppercase tracking-widest text-pm-parchment-2 hover:text-pm-cream border border-pm-frame hover:border-pm-gold transition-colors"
             aria-label="Sair"
           >
             <LogOut size={14} />

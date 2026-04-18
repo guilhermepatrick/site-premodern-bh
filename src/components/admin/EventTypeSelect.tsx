@@ -14,7 +14,7 @@ const OPTIONS: Array<{ value: EventType; label: string; hint: string }> = [
 export default function EventTypeSelect({ value, onChange, disabled }: Props) {
   return (
     <fieldset disabled={disabled} className="flex flex-col gap-2">
-      <legend className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted">
+      <legend className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2">
         Tipo de evento
       </legend>
       <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Tipo de evento">
@@ -29,8 +29,8 @@ export default function EventTypeSelect({ value, onChange, disabled }: Props) {
               onClick={() => onChange(opt.value)}
               className={`px-5 py-2 rounded-full text-sm font-title font-600 uppercase tracking-widest border transition-all ${
                 active
-                  ? 'bg-vc-blue border-vc-blue text-vc-white shadow-vc-blue'
-                  : 'bg-transparent border-vc-border-2 text-vc-muted hover:border-vc-blue hover:text-vc-white'
+                  ? 'bg-pm-green border-pm-green text-pm-cream'
+                  : 'bg-transparent border-pm-frame text-pm-parchment-2 hover:border-pm-gold hover:text-pm-cream'
               }`}
             >
               <span>{opt.label}</span>

@@ -43,14 +43,14 @@ export default function NewSeasonPage() {
     <Section eyebrow="Admin" title="Nova temporada">
       <form
         onSubmit={handleSubmit}
-        className="space-y-5 bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card max-w-2xl"
+        className="space-y-5 bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift max-w-2xl mx-auto"
       >
-        <p className="text-xs text-vc-muted font-title uppercase tracking-widest">
-          Formato: <span className="text-vc-blue-hi">{FORMAT}</span>
+        <p className="text-xs text-pm-parchment-2 font-title uppercase tracking-widest">
+          Formato: <span className="text-pm-gold">{FORMAT}</span>
         </p>
 
         <label className="block">
-          <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+          <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
             Nome da temporada
           </span>
           <input
@@ -59,41 +59,41 @@ export default function NewSeasonPage() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Ex: Semanal Abril"
             required
-            className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue focus:ring-1 focus:ring-vc-blue"
+            className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold focus:ring-1 focus:ring-pm-gold"
           />
         </label>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <label className="block">
-            <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+            <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
               Inicio (opcional)
             </span>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+              className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
             />
           </label>
           <label className="block">
-            <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+            <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
               Fim (opcional)
             </span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+              className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
             />
           </label>
         </div>
 
-        <label className="inline-flex items-center gap-2 text-sm text-vc-white cursor-pointer">
+        <label className="inline-flex items-center gap-2 text-sm text-pm-cream cursor-pointer">
           <input
             type="checkbox"
             checked={isActive}
             onChange={(e) => setIsActive(e.target.checked)}
-            className="w-4 h-4 accent-vc-blue"
+            className="w-4 h-4 accent-pm-green"
           />
           <span className="font-title uppercase tracking-widest text-xs">Temporada ativa</span>
         </label>
@@ -111,14 +111,14 @@ export default function NewSeasonPage() {
         <div className="flex items-center justify-end gap-3">
           <Link
             to="/admin/temporadas"
-            className="px-4 py-2 rounded border border-vc-border-2 text-vc-muted hover:text-vc-white hover:border-vc-blue font-title uppercase tracking-widest text-xs"
+            className="px-4 py-2 rounded border border-pm-frame text-pm-parchment-2 hover:text-pm-cream hover:border-pm-gold font-title uppercase tracking-widest text-xs"
           >
             Cancelar
           </Link>
           <button
             type="submit"
             disabled={!canSave}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-vc-blue hover:bg-vc-blue-hi disabled:bg-vc-blue-dim disabled:cursor-not-allowed text-vc-white font-title font-600 uppercase tracking-widest text-sm shadow-vc-blue transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-pm-green hover:bg-pm-green-hi disabled:bg-pm-green-deep disabled:cursor-not-allowed text-pm-cream font-title font-600 uppercase tracking-widest text-sm transition-colors"
           >
             {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
             {saving ? 'Criando...' : 'Criar temporada'}

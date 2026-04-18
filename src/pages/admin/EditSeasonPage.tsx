@@ -95,7 +95,7 @@ export default function EditSeasonPage() {
   if (loading) {
     return (
       <Section eyebrow="Admin" title="Editar temporada">
-        <div className="flex items-center gap-2 text-vc-muted">
+        <div className="flex items-center gap-2 text-pm-parchment-2 font-body italic">
           <Loader2 size={16} className="animate-spin" /> Carregando...
         </div>
       </Section>
@@ -105,11 +105,11 @@ export default function EditSeasonPage() {
   if (notFound) {
     return (
       <Section eyebrow="Admin" title="Temporada nao encontrada">
-        <div className="space-y-3">
-          <p className="text-vc-muted">A temporada solicitada nao existe ou foi removida.</p>
+        <div className="space-y-3 text-center">
+          <p className="text-pm-parchment-2 font-body italic">A temporada solicitada nao existe ou foi removida.</p>
           <Link
             to="/admin/temporadas"
-            className="inline-flex px-4 py-2 rounded bg-vc-blue hover:bg-vc-blue-hi text-vc-white font-title uppercase tracking-widest text-xs"
+            className="inline-flex px-4 py-2 rounded bg-pm-green hover:bg-pm-green-hi text-pm-cream font-title uppercase tracking-widest text-xs"
           >
             Voltar para lista
           </Link>
@@ -123,84 +123,84 @@ export default function EditSeasonPage() {
   return (
     <Section eyebrow="Admin" title={`Editar: ${season.name}`}>
       <div className="space-y-6">
-        <p className="text-xs text-vc-muted uppercase tracking-widest font-title">
-          Formato: <span className="text-vc-blue-hi">{season.format ?? '—'}</span>{' '}
-          <span className="ml-2 text-vc-muted/70">(read-only)</span>
+        <p className="text-xs text-pm-parchment-2 uppercase tracking-widest font-title text-center">
+          Formato: <span className="text-pm-gold">{season.format ?? '—'}</span>{' '}
+          <span className="ml-2 text-pm-parchment-2/60">(read-only)</span>
         </p>
 
-        <div className="bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card space-y-4">
+        <div className="bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift space-y-4">
           <label className="block">
-            <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+            <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
               Nome
             </span>
             <input
               type="text"
               value={draftName}
               onChange={(e) => setDraftName(e.target.value)}
-              className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+              className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold focus:ring-1 focus:ring-pm-gold"
             />
           </label>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <label className="block">
-              <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+              <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                 Inicio (opcional)
               </span>
               <input
                 type="date"
                 value={draftStart}
                 onChange={(e) => setDraftStart(e.target.value)}
-                className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
               />
             </label>
             <label className="block">
-              <span className="font-title text-xs tracking-[0.25em] uppercase text-vc-muted block mb-1">
+              <span className="font-title text-xs tracking-[0.25em] uppercase text-pm-parchment-2 block mb-1">
                 Fim (opcional)
               </span>
               <input
                 type="date"
                 value={draftEnd}
                 onChange={(e) => setDraftEnd(e.target.value)}
-                className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue"
+                className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold"
               />
             </label>
           </div>
 
-          <label className="inline-flex items-center gap-2 text-sm text-vc-white cursor-pointer">
+          <label className="inline-flex items-center gap-2 text-sm text-pm-cream cursor-pointer">
             <input
               type="checkbox"
               checked={draftActive}
               onChange={(e) => setDraftActive(e.target.checked)}
-              className="w-4 h-4 accent-vc-blue"
+              className="w-4 h-4 accent-pm-green"
             />
             <span className="font-title uppercase tracking-widest text-xs">Temporada ativa</span>
           </label>
         </div>
 
-        <div className="bg-vc-bg-2 border border-vc-border rounded-lg p-5 shadow-vc-card space-y-3">
-          <h3 className="font-title uppercase tracking-widest text-sm text-vc-muted">
+        <div className="bg-pm-bg-2 border border-pm-frame rounded-sm p-5 shadow-card-lift space-y-3">
+          <h3 className="font-title uppercase tracking-widest text-sm text-pm-gold">
             Etapas vinculadas{' '}
-            <span className="text-vc-blue-hi">({season.stages.length})</span>
+            <span className="text-pm-cream">({season.stages.length})</span>
           </h3>
           {season.stages.length === 0 ? (
-            <p className="text-vc-muted text-sm italic">
+            <p className="text-pm-parchment-2 text-sm italic font-body">
               Nenhuma etapa vinculada. Esta temporada pode ser excluida.
             </p>
           ) : (
-            <ul className="divide-y divide-vc-border-2 border border-vc-border-2 rounded overflow-hidden">
+            <ul className="divide-y divide-pm-frame border border-pm-frame rounded-sm overflow-hidden">
               {season.stages.map((st) => (
-                <li key={st.id} className="bg-vc-bg-3 hover:bg-vc-bg-2 transition-colors">
+                <li key={st.id} className="bg-pm-frame hover:bg-pm-bg-2 transition-colors">
                   <Link
                     to={`/admin/etapas/${st.id}`}
                     className="flex items-center justify-between gap-3 px-3 py-2"
                   >
                     <div className="min-w-0">
-                      <p className="text-sm text-vc-white truncate">{st.name}</p>
-                      <p className="text-[11px] text-vc-muted mt-0.5 flex flex-wrap gap-x-3">
+                      <p className="text-sm text-pm-cream truncate font-title">{st.name}</p>
+                      <p className="text-[11px] text-pm-parchment-2 mt-0.5 flex flex-wrap gap-x-3 font-body">
                         <span>{st.eventDate}</span>
                         <span
                           className={
-                            st.eventType === 'liga' ? 'text-vc-blue-hi' : 'text-vc-cyan'
+                            st.eventType === 'liga' ? 'text-pm-green-hi' : 'text-pm-gold'
                           }
                         >
                           {st.eventType}
@@ -208,7 +208,7 @@ export default function EditSeasonPage() {
                         {typeof st.rounds === 'number' && <span>· {st.rounds} rodadas</span>}
                       </p>
                     </div>
-                    <ChevronRight size={14} className="text-vc-muted" />
+                    <ChevronRight size={14} className="text-pm-parchment-2" />
                   </Link>
                 </li>
               ))}
@@ -238,7 +238,7 @@ export default function EditSeasonPage() {
               Excluir temporada
             </button>
             {!canDelete && season.stages.length > 0 && (
-              <p className="text-[11px] text-vc-muted max-w-xs leading-relaxed">
+              <p className="text-[11px] text-pm-parchment-2 max-w-xs leading-relaxed font-body italic">
                 Remova as {season.stages.length}{' '}
                 {season.stages.length === 1 ? 'etapa vinculada' : 'etapas vinculadas'} ou desative a
                 temporada.
@@ -249,7 +249,7 @@ export default function EditSeasonPage() {
           <div className="flex items-center gap-3">
             <Link
               to="/admin/temporadas"
-              className="px-4 py-2 rounded border border-vc-border-2 text-vc-muted hover:text-vc-white hover:border-vc-blue font-title uppercase tracking-widest text-xs"
+              className="px-4 py-2 rounded border border-pm-frame text-pm-parchment-2 hover:text-pm-cream hover:border-pm-gold font-title uppercase tracking-widest text-xs"
             >
               Cancelar
             </Link>
@@ -257,7 +257,7 @@ export default function EditSeasonPage() {
               type="button"
               onClick={handleSave}
               disabled={!canSave}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-vc-blue hover:bg-vc-blue-hi disabled:bg-vc-blue-dim disabled:cursor-not-allowed text-vc-white font-title font-600 uppercase tracking-widest text-sm shadow-vc-blue transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-pm-green hover:bg-pm-green-hi disabled:bg-pm-green-deep disabled:cursor-not-allowed text-pm-cream font-title font-600 uppercase tracking-widest text-sm transition-colors"
             >
               {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
               {saving ? 'Salvando...' : 'Salvar alteracoes'}

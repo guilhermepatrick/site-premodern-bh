@@ -34,15 +34,15 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-vc-bg flex flex-col">
+    <div className="min-h-screen bg-pm-bg bg-dark-grain flex flex-col">
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-md">
           <Section eyebrow="Area restrita" title="Admin Premodern">
             <form
               onSubmit={handleSubmit}
-              className="space-y-4 bg-vc-bg-2 border border-vc-border rounded-lg p-6 shadow-vc-card"
+              className="space-y-4 bg-pm-bg-2 border border-pm-frame rounded-sm p-6 shadow-card-lift"
             >
-              <div className="flex items-center gap-2 text-vc-cyan">
+              <div className="flex items-center gap-2 text-pm-gold">
                 <Lock size={18} />
                 <span className="font-title uppercase tracking-widest text-xs">
                   Acesso do operador
@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
               <div className="space-y-1">
                 <label
                   htmlFor="login-email"
-                  className="block font-title text-xs uppercase tracking-[0.25em] text-vc-muted"
+                  className="block font-title text-xs uppercase tracking-[0.25em] text-pm-parchment-2"
                 >
                   E-mail
                 </label>
@@ -64,14 +64,14 @@ export default function AdminLoginPage() {
                   required
                   autoFocus
                   autoComplete="email"
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue focus:ring-1 focus:ring-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold focus:ring-1 focus:ring-pm-gold"
                 />
               </div>
 
               <div className="space-y-1">
                 <label
                   htmlFor="login-password"
-                  className="block font-title text-xs uppercase tracking-[0.25em] text-vc-muted"
+                  className="block font-title text-xs uppercase tracking-[0.25em] text-pm-parchment-2"
                 >
                   Senha
                 </label>
@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
                   required
                   autoComplete="current-password"
                   aria-describedby={error ? 'login-error' : undefined}
-                  className="w-full bg-vc-bg-3 border border-vc-border-2 rounded px-3 py-2 text-vc-white focus:outline-none focus:border-vc-blue focus:ring-1 focus:ring-vc-blue"
+                  className="w-full bg-pm-frame border border-pm-frame rounded px-3 py-2 text-pm-cream focus:outline-none focus:border-pm-gold focus:ring-1 focus:ring-pm-gold"
                 />
               </div>
 
@@ -101,7 +101,7 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={busy || !email || !password}
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded bg-vc-blue hover:bg-vc-blue-hi disabled:bg-vc-blue-dim disabled:cursor-not-allowed text-vc-white font-title font-600 uppercase tracking-widest text-sm transition-colors shadow-vc-blue"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded bg-pm-green hover:bg-pm-green-hi disabled:bg-pm-green-deep disabled:cursor-not-allowed text-pm-cream font-title font-600 uppercase tracking-widest text-sm transition-colors"
               >
                 {busy && <Loader2 size={16} className="animate-spin" />}
                 {busy ? 'Entrando...' : 'Entrar'}
