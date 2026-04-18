@@ -33,8 +33,8 @@ export default {
         'vc-border-2':'#303038',
       },
       fontFamily: {
-        title: ['Rajdhani', 'Cinzel', 'serif'],
-        body:  ['Inter', '"EB Garamond"', 'Georgia', 'serif'],
+        title: ['Cinzel', 'serif'],
+        body:  ['"EB Garamond"', 'Georgia', 'serif'],
       },
       boxShadow: {
         'old-frame':       'inset 0 0 0 2px #1F1A14, inset 0 0 0 4px #8B6F47, inset 0 0 0 6px #3D2F1F',
